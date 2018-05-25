@@ -1,0 +1,16 @@
+(jbuild_version 1)
+
+(menhir
+ ((modules (format_a_parser))))
+
+(ocamllex
+ ((modules (format_a_lexer))))
+
+(executables
+ ((names        (uuuui))
+  (package      uuuui)
+  (public_names (uuuui))
+  (libraries    (ppx_tools compiler-libs.common
+                 fmt bos rresult cmdliner ptmap
+                 angstrom emile uri))
+  (preprocess   (pps (ppx_metaquot)))))
