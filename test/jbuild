@@ -1,0 +1,22 @@
+(jbuild_version 1)
+
+(rule
+ ((targets (dune.inc.gen))
+  (deps (generate.ml (glob_files maps/*.TXT)))
+  (action (run ${OCAML} ${<} --database maps -o ${@}))))
+
+(include dune.inc)
+
+(alias
+ ((name runtest)
+  (action (diff dune.inc dune.inc.gen))))
+
+(executable
+ ((name iso8859)
+  (libraries (ptmap fmt fmt.tty fmt.cli cmdliner uucd))
+  (public_name uuuui.iso8859)))
+
+(alias
+ ((name runtest)
+  (deps (ucd.all.grouped.xml))
+  (action (run ${exe:iso8859.exe} --color=always --database ucd.all.grouped.xml))))
